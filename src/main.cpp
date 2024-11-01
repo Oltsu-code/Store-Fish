@@ -2,8 +2,11 @@
 #include "ui.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Chess Engine");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Store Fish");
 
+    UI ui(&window);
+
+    // Main loop
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -11,9 +14,12 @@ int main() {
                 window.close();
         }
 
-        window.clear();
-        drawBoard(window);  
+        window.clear(sf::Color::White);
+
+        ui.draw();
+
         window.display();
     }
+
     return 0;
 }

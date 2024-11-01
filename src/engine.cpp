@@ -1,13 +1,7 @@
 #include "engine.h"
 
-ChessEngine::ChessEngine() {
-    //! Constructor
+Engine::Engine() {
 }
 
-void ChessEngine::generateMoves() {
-    //! Move Logic
-}
-
-void ChessEngine::evaluatePosition() {
-    //! Position Evaluation
+void Engine::makeMove() {
 }

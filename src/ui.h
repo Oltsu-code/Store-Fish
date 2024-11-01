@@ -3,6 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 
-void drawBoard(sf::RenderWindow& window);
+class UI {
+public:
+    UI(sf::RenderWindow* window);
+    void draw();
+    
+private:
+    sf::RenderWindow* window;
+    sf::RectangleShape board; // Example shape for the chessboard
+    void setupBoard();
+};
 
 #endif // UI_H

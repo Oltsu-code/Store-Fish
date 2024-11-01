@@ -1,14 +1,13 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <vector>
-#include <string>
-
-class ChessEngine {
+class Engine {
 public:
-    ChessEngine();
-    void generateMoves();   
-    void evaluatePosition();  
+    Engine();
+    void makeMove();
+
+private:
+
 };
 
-#endif // ENGINE_H
+#endif 
