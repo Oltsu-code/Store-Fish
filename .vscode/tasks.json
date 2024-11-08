@@ -2,29 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build debug",
+            "label": "build chess_engine",
             "type": "shell",
-            "command": "cmake",
+            "command": "g++",
             "args": [
-                "--build", "${workspaceFolder}/build/Debug"
+                "${workspaceFolder}/src/main.cpp",
+                "-o", "${workspaceFolder}/build/chess_engine",
+                "-I", "C:/SFML-2.6.1/include",
+                "-L", "C:/SFML-2.6.1/lib",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "problemMatcher": ["$gcc"]
-        },
-        {
-            "label": "build release",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build", "${workspaceFolder}/build/Release"
-            ],
-            "group": {
-                "kind": "build"
-            },
-            "problemMatcher": ["$gcc"]
+            }
         }
     ]
 }

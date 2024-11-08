@@ -1,12 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include "ui.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Store Fish");
+    // Try to create a simple SFML window.
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 
-    UI ui(&window);
-
-    // Main loop
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -14,10 +11,7 @@ int main() {
                 window.close();
         }
 
-        window.clear(sf::Color::White);
-
-        ui.draw();
-
+        window.clear();
         window.display();
     }
 
