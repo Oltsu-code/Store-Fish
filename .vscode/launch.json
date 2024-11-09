@@ -5,7 +5,7 @@
             "name": "Debug SFML Program",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/chess_engine.exe",
+            "program": "${workspaceFolder}/build/app.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

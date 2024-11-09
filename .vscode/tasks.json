@@ -2,12 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build chess_engine",
+            "label": "Build Chess Engine",
             "type": "shell",
             "command": "g++",
             "args": [
-                "${workspaceFolder}/src/main.cpp",
-                "-o", "${workspaceFolder}/build/chess_engine",
+                "src/*.cpp",
+                "-o", "build/chess_engine",
                 "-I", "C:/SFML-2.6.1/include",
                 "-L", "C:/SFML-2.6.1/lib",
                 "-lsfml-graphics",
@@ -17,7 +17,61 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compiles and links the chess engine project"
+        },
+        {
+            "label": "Copy Assets",
+            "type": "shell",
+            "command": "xcopy",
+            "args": [
+                "/E", "/I", "/H", "/Y",
+                "assets\\pieces\\*",
+                "build\\assets\\pieces\\"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Copies assets from pieces directory"
+        },
+        {
+            "label": "Copy Fonts",
+            "type": "shell",
+            "command": "xcopy",
+            "args": [
+                "/E", "/I", "/H", "/Y",
+                "assets\\fonts\\*",
+                "build\\assets\\fonts\\"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Copies assets from fonts directory"
+        },
+        {
+            "label": "Build and Copy",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build Chess Engine",
+                "Copy Assets",
+                "Copy Fonts"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build the chess engine and copy assets"
         }
     ]
 }
