@@ -11,7 +11,10 @@ public:
     ~chessboard();  // Destructor
     
     void draw(sf::RenderWindow& window);  // Draw the board
-    void drawSquares(sf::RenderWindow& window);  // Declare the function
+    void drawSquares(sf::RenderWindow& window);  // Draw the squares on the chessboard
+    
+    piece* getPieceAt(int x, int y);  // Get the piece at a specific position
+    void movePiece(piece* p, int targetX, int targetY);  // Move a piece to a new position
 
 private:
     void initializeBoard();  // Initialize the board with pieces

@@ -2,12 +2,13 @@
 #include "../include/game.hpp"
 
 int main() {
-
     std::cout << "Initializing..." << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode(512, 512), "Chess Game");
+    sf::RenderWindow window(sf::VideoMode(800, 512), "Chess Game");  // Increase window width to fit UI
     
     game chessGame;
+
+    std::cout << "Done!" << std::endl;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -20,7 +21,7 @@ int main() {
         chessGame.update();
 
         window.clear();
-        chessGame.render(window);
+        chessGame.render(window);  // Render the game with UI
         window.display();
     }
 

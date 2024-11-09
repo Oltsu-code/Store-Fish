@@ -15,6 +15,10 @@ public:
         }
     }
 
+    void setSpritePosition(float x, float y) {
+        sprite.setPosition(x, y);
+    }
+
     virtual ~piece() {}
 
     virtual void draw(sf::RenderWindow& window) {
