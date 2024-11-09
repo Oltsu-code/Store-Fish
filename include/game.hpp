@@ -15,11 +15,11 @@ public:
 
 private:
     chessboard* board; 
-    piece* selectedPiece;  // Track the selected piece
-    bool isWhiteTurn;      // Track whose turn it is
+    piece* selectedPiece;  
+    bool isWhiteTurn;      
 
     void selectPiece(piece* p);
     void movePiece(int targetX, int targetY);
 };
 
-#endif
+#endif 

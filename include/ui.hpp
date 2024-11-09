@@ -22,4 +22,4 @@ private:
     sf::Text gameInfoText;
 };
 
-#endif // UI_HPP
+#endif 

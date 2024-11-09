@@ -7,18 +7,19 @@
 
 class chessboard {
 public:
-    chessboard();  // Constructor
-    ~chessboard();  // Destructor
+    chessboard();  
+    ~chessboard();  
     
-    void draw(sf::RenderWindow& window);  // Draw the board
-    void drawSquares(sf::RenderWindow& window);  // Draw the squares on the chessboard
+    void draw(sf::RenderWindow& window);  
+    void drawSquares(sf::RenderWindow& window);  
     
-    piece* getPieceAt(int x, int y);  // Get the piece at a specific position
-    void movePiece(piece* p, int targetX, int targetY);  // Move a piece to a new position
+    piece* selectedPiece = nullptr;  
+    piece* getPieceAt(int x, int y);  
+    void movePiece(piece* p, int targetX, int targetY);  
 
 private:
-    void initializeBoard();  // Initialize the board with pieces
-    std::vector<std::vector<piece*>> board;  // 8x8 chessboard
+    void initializeBoard();  
+    std::vector<std::vector<piece*>> board;  
 };
 
-#endif // CHESSBOARD_HPP
+#endif 

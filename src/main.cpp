@@ -4,7 +4,7 @@
 int main() {
     std::cout << "Initializing..." << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode(800, 512), "Chess Game");  // Increase window width to fit UI
+    sf::RenderWindow window(sf::VideoMode(800, 512), "Sore Fish");
     
     game chessGame;
 
@@ -21,7 +21,7 @@ int main() {
         chessGame.update();
 
         window.clear();
-        chessGame.render(window);  // Render the game with UI
+        chessGame.render(window); 
         window.display();
     }
 

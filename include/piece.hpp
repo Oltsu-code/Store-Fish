@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -10,13 +11,9 @@ public:
             std::cerr << "Error loading image: " << imagePath << std::endl;
         } else {
             sprite.setTexture(texture);
-            sprite.setPosition(position.x * 64.f, position.y * 64.f); 
+            sprite.setPosition(position.x * 64.f, position.y * 64.f); // Positioning the sprite on the chessboard
             imageLoaded = true;
         }
-    }
-
-    void setSpritePosition(float x, float y) {
-        sprite.setPosition(x, y);
     }
 
     virtual ~piece() {}
@@ -29,11 +26,17 @@ public:
 
     virtual bool isValidMove(int startX, int startY, int endX, int endY) = 0;
 
-    sf::Vector2i position;  
+    sf::Vector2i getPosition() const { return position; }
+
+    void setPosition(sf::Vector2i newPos) { position = newPos; }
+
     bool isWhite;
 
 protected:
     sf::Texture texture;
     sf::Sprite sprite;
     bool imageLoaded;
+
+private:
+    sf::Vector2i position;
 };

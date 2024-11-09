@@ -1,0 +1,4 @@
+-life
+-player turn check
+-life
+-its not done
