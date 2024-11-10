@@ -1,6 +1,8 @@
 #include <iostream>
 
+#include "../include/move.hpp"
 #include "../include/chessboard.hpp"
+
 #include "../include/pieces/pawn.hpp"
 #include "../include/pieces/rook.hpp"
 #include "../include/pieces/knight.hpp"
@@ -49,35 +51,45 @@ void chessboard::initializeBoard() {
     board[7][4] = new king(false, {4, 7});
 }
 
-piece* chessboard::getPieceAt(int x, int y) {
+piece* chessboard::getPieceAt(int x, int y) const {
     if (x >= 0 && x < 8 && y >= 0 && y < 8) {
         return board[y][x];
     }
     return nullptr;
 }
 
-void chessboard::movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn) {
-    if (p == nullptr) return;
+bool chessboard::movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn) {
+    if (p == nullptr) return false;
 
     if (p->isWhite != isWhiteTurn) {
         std::cout << "It's not your turn!" << std::endl;
-        return;
+        return false;
     }
 
     sf::Vector2i currentPos = p->getPosition();
-    
+
     std::cout << "Moving piece from (" << currentPos.x << ", " << currentPos.y << ") to ("
               << targetX << ", " << targetY << ")" << std::endl;
 
-    if (p->isValidMove(currentPos.x, currentPos.y, targetX, targetY)) {
-        board[currentPos.y][currentPos.x] = nullptr;  
-        p->setPosition(sf::Vector2i(targetX, targetY));  
-        board[targetY][targetX] = p;  
+    chessMove lastMove(p, currentPos.x, currentPos.y, targetX, targetY);
+
+    if (p->isValidMove(currentPos.x, currentPos.y, targetX, targetY, *this, lastMove)) {
+        this->board[currentPos.y][currentPos.x] = nullptr;
+        p->setPosition(sf::Vector2i(targetX, targetY));
+        this->board[targetY][targetX] = p;
         std::cout << "Move successful" << std::endl;
+        return true;
     } else {
         std::cout << "Invalid move" << std::endl;
+        return false;
     }
+
+    std::cout << "how tf did you get here" << std::endl;
+
+    return false;
 }
+
+
 
 void chessboard::draw(sf::RenderWindow& window) {
     drawSquares(window);

@@ -6,12 +6,12 @@
 int main() {
     std::cout << "Initializing..." << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode(800, 512), "Sore Fish");
+    sf::RenderWindow window(sf::VideoMode(800, 512), "Sore Fish - Chess engine | Oltsu-Code");
     
     game chessGame;
 
     std::cout << "Done!" << std::endl;
- 
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -19,11 +19,11 @@ int main() {
                 window.close();
             chessGame.handleInput(event);
         }
-
+        
         chessGame.update();
-        chessGame.render(window); 
 
         window.clear();
+        chessGame.render(window); 
         window.display();
     }
 

@@ -24,21 +24,25 @@ void game::handleInput(const sf::Event& event) {
                 selectedPiece = clickedPiece;
                 std::cout << "Piece selected at (" << x << ", " << y << ")" << std::endl;
             } else {
-                std::cout << "No piece selected or not your turn!" << std::endl;
+                std::cout << "Invalid selection: No piece or not your turn!" << std::endl;
             }
         } else {
-            board->movePiece(selectedPiece, x, y, isWhiteTurn);
-
-            if (board->getPieceAt(x, y) == selectedPiece) {
-                isWhiteTurn = !isWhiteTurn;  
+            bool moveSuccessful = board->movePiece(selectedPiece, x, y, isWhiteTurn);
+            if (moveSuccessful) {
+                isWhiteTurn = !isWhiteTurn;
+                std::cout << "Move successful. Turn switched to " << (isWhiteTurn ? "White" : "Black") << "." << std::endl;
+            } else {
+                std::cout << "Invalid move. Try again." << std::endl;
             }
+
             selectedPiece = nullptr;
         }
     }
 }
 
+
 void game::update() {
-    //TODO Add the game's position updation here    
+    //TODO Add the game's position update here    
 }
 
 void game::render(sf::RenderWindow& window) {

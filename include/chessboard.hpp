@@ -2,8 +2,10 @@
 #define CHESSBOARD_HPP
 
 #include <SFML/Graphics.hpp>
-#include "piece.hpp"
 #include <vector>
+
+#include "move.hpp"
+#include "piece.hpp"
 
 class chessboard {
 public:
@@ -14,12 +16,17 @@ public:
     void drawSquares(sf::RenderWindow& window);  
     
     piece* selectedPiece = nullptr;  
-    piece* getPieceAt(int x, int y);  
-    void movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn);  
+    piece* getPieceAt(int x, int y) const;  
+    bool movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn);
+
+
+    chessMove getLastMove() const { return lastMove; }  
+    void setLastMove(const chessMove& move) { lastMove = move; }  
 
 private:
     void initializeBoard();  
     std::vector<std::vector<piece*>> board;  
+    chessMove lastMove;  
 };
 
 #endif 

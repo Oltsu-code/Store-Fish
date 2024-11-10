@@ -10,8 +10,27 @@ public:
         piece::draw(window);
     }
 
-    bool isValidMove(int startX, int startY, int endX, int endY) override {
-        //TODO: Valid move logic
-        return false;
+    bool isValidMove(int startX, int startY, int endX, int endY,
+        const chessboard& board, const chessMove& lastMove) override {
+        // Check if inside the board
+        if (endX < 0 || endX >= 8 || endY < 0 || endY >= 8) {
+            return false;
+        }
+
+        // One square in each direction
+        if (abs(endX - startX) > 1 || abs(endY - startY) > 1) {
+            return false;
+        }
+
+        // Friendly fire
+        piece* targetPiece = board.getPieceAt(endX, endY);
+        if (targetPiece != nullptr && targetPiece->isWhite == this->isWhite) {
+            return false;
+        }
+
+        //TODO: Castling logic (im too dumb to handle it right now)
+
+        return true;
     }
+
 };

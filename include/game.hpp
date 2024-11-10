@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+
 #include "chessboard.hpp"
 
 class game {

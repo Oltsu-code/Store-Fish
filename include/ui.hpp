@@ -10,7 +10,7 @@ public:
     ~UI();
     
     void draw(sf::RenderWindow& window);
-    void update();  // If you want to add interactive features later
+    void update();
     
 private:
     float leftBarWidth;
