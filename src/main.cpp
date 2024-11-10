@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
 #include "../include/game.hpp"
 
 int main() {
@@ -9,7 +11,7 @@ int main() {
     game chessGame;
 
     std::cout << "Done!" << std::endl;
-
+ 
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -19,9 +21,9 @@ int main() {
         }
 
         chessGame.update();
+        chessGame.render(window); 
 
         window.clear();
-        chessGame.render(window); 
         window.display();
     }
 

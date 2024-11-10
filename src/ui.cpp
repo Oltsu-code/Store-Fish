@@ -1,5 +1,6 @@
-#include "../include/ui.hpp"
 #include <iostream>
+
+#include "../include/ui.hpp"
 
 UI::UI(float leftBarWidth, float rightBarWidth)
     : leftBarWidth(leftBarWidth), rightBarWidth(rightBarWidth) {
@@ -28,7 +29,6 @@ UI::~UI() {
 void UI::draw(sf::RenderWindow& window) {
     window.draw(leftBar);
     window.draw(rightBar);
-    
     window.draw(gameInfoText);
 }
 

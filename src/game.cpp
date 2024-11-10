@@ -1,8 +1,8 @@
-
+#include <SFML/Window.hpp>
+#include <iostream>
 
 #include "../include/game.hpp"
 #include "../include/piece.hpp"
-#include <SFML/Window.hpp>
 
 game::game() : isWhiteTurn(true), selectedPiece(nullptr) {
     board = new chessboard();
@@ -17,19 +17,28 @@ void game::handleInput(const sf::Event& event) {
         int x = event.mouseButton.x / 64;
         int y = event.mouseButton.y / 64;
 
+        piece* clickedPiece = board->getPieceAt(x, y);
+
         if (selectedPiece == nullptr) {
-            selectedPiece = board->getPieceAt(x, y);
+            if (clickedPiece != nullptr && clickedPiece->isWhite == isWhiteTurn) {
+                selectedPiece = clickedPiece;
+                std::cout << "Piece selected at (" << x << ", " << y << ")" << std::endl;
+            } else {
+                std::cout << "No piece selected or not your turn!" << std::endl;
+            }
         } else {
-            
-            board->movePiece(selectedPiece, x, y);
+            board->movePiece(selectedPiece, x, y, isWhiteTurn);
+
+            if (board->getPieceAt(x, y) == selectedPiece) {
+                isWhiteTurn = !isWhiteTurn;  
+            }
             selectedPiece = nullptr;
-            isWhiteTurn = !isWhiteTurn;  
         }
     }
 }
 
 void game::update() {
-    //! Update game logic (if necessary)
+    //TODO Add the game's position updation here    
 }
 
 void game::render(sf::RenderWindow& window) {

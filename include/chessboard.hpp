@@ -15,7 +15,7 @@ public:
     
     piece* selectedPiece = nullptr;  
     piece* getPieceAt(int x, int y);  
-    void movePiece(piece* p, int targetX, int targetY);  
+    void movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn);  
 
 private:
     void initializeBoard();  

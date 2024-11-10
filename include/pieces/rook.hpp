@@ -11,7 +11,8 @@ public:
     }
 
     bool isValidMove(int startX, int startY, int endX, int endY) override {
-        //TODO: Valid move logic
+        //TODO: Valid move logic for rook 
         return false;
     }
 };
+

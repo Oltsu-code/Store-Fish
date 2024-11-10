@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../include/chessboard.hpp"
 #include "../include/pieces/pawn.hpp"
 #include "../include/pieces/rook.hpp"
@@ -54,8 +56,13 @@ piece* chessboard::getPieceAt(int x, int y) {
     return nullptr;
 }
 
-void chessboard::movePiece(piece* p, int targetX, int targetY) {
+void chessboard::movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn) {
     if (p == nullptr) return;
+
+    if (p->isWhite != isWhiteTurn) {
+        std::cout << "It's not your turn!" << std::endl;
+        return;
+    }
 
     sf::Vector2i currentPos = p->getPosition();
     
@@ -66,6 +73,7 @@ void chessboard::movePiece(piece* p, int targetX, int targetY) {
         board[currentPos.y][currentPos.x] = nullptr;  
         p->setPosition(sf::Vector2i(targetX, targetY));  
         board[targetY][targetX] = p;  
+        std::cout << "Move successful" << std::endl;
     } else {
         std::cout << "Invalid move" << std::endl;
     }
