@@ -17,27 +17,23 @@ void game::handleInput(const sf::Event& event) {
         int x = event.mouseButton.x / 64;
         int y = event.mouseButton.y / 64;
 
+        
         piece* clickedPiece = board->getPieceAt(x, y);
 
         if (selectedPiece == nullptr) {
             if (clickedPiece != nullptr && clickedPiece->isWhite == isWhiteTurn) {
                 selectedPiece = clickedPiece;
-                std::cout << "Piece selected at (" << x << ", " << y << ")" << std::endl;
             } else {
-                std::cout << "Invalid selection: No piece or not your turn!" << std::endl;
+                std::cout << "Invalid selection!" << std::endl;
             }
         } else {
-            bool moveSuccessful = board->movePiece(selectedPiece, x, y, isWhiteTurn);
-            if (moveSuccessful) {
-                isWhiteTurn = !isWhiteTurn;
-            } else {
-                std::cout << "Invalid move. Try again." << std::endl;
-            }
+            board->movePiece(selectedPiece, x, y, isWhiteTurn);
 
             selectedPiece = nullptr;
         }
     }
 }
+
 
 
 void game::update() {

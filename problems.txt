@@ -1,4 +1,9 @@
 -life
--player turn check
+-checkmate
+-lfe
+-stalemate
+-life
+-check
+-EN PASSANT NOT WORKING
 -life
 -its not done
