@@ -4,7 +4,7 @@
 class queen : public piece {
 public:
     queen(bool isWhite, sf::Vector2i position)
-        : piece(isWhite, position, isWhite ? "assets/pieces/queen.white.png" : "assets/pieces/queen.black.png") {}
+        : piece(isWhite, position, isWhite ? "assets/pieces/queen.white.png" : "assets/pieces/queen.black.png", "queen", 'q') {}
 
     void draw(sf::RenderWindow& window) override {
         piece::draw(window);

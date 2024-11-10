@@ -30,7 +30,6 @@ void game::handleInput(const sf::Event& event) {
             bool moveSuccessful = board->movePiece(selectedPiece, x, y, isWhiteTurn);
             if (moveSuccessful) {
                 isWhiteTurn = !isWhiteTurn;
-                std::cout << "Move successful. Turn switched to " << (isWhiteTurn ? "White" : "Black") << "." << std::endl;
             } else {
                 std::cout << "Invalid move. Try again." << std::endl;
             }

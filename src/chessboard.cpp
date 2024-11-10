@@ -2,6 +2,7 @@
 
 #include "../include/move.hpp"
 #include "../include/chessboard.hpp"
+#include "../include/util.hpp"
 
 #include "../include/pieces/pawn.hpp"
 #include "../include/pieces/rook.hpp"
@@ -68,8 +69,10 @@ bool chessboard::movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn)
 
     sf::Vector2i currentPos = p->getPosition();
 
-    std::cout << "Moving piece from (" << currentPos.x << ", " << currentPos.y << ") to ("
-              << targetX << ", " << targetY << ")" << std::endl;
+    std::string startPos = indexToNotation(currentPos.x, currentPos.y);
+    std::string endPos = indexToNotation(targetX, targetY);
+
+    std::cout << p->getSymbol() << " (" << p->getName() << ") " << " from " << startPos << " to " << endPos << std::endl;
 
     chessMove lastMove(p, currentPos.x, currentPos.y, targetX, targetY);
 
@@ -77,14 +80,15 @@ bool chessboard::movePiece(piece* p, int targetX, int targetY, bool isWhiteTurn)
         this->board[currentPos.y][currentPos.x] = nullptr;
         p->setPosition(sf::Vector2i(targetX, targetY));
         this->board[targetY][targetX] = p;
-        std::cout << "Move successful" << std::endl;
+        std::cout << "Move successful. Turn switched to " << (isWhiteTurn ? "White" : "Black") << std::endl;
+
+        printBoard();
+
         return true;
     } else {
         std::cout << "Invalid move" << std::endl;
         return false;
     }
-
-    std::cout << "how tf did you get here" << std::endl;
 
     return false;
 }
@@ -116,3 +120,21 @@ void chessboard::drawSquares(sf::RenderWindow& window) {
         }
     }
 }
+
+// FOR DEBUG PURPOSES
+void chessboard::printBoard() const {
+    std::cout << "Board:" << std::endl;
+    for (int y = 0; y < 8; ++y) {
+        for (int x = 0; x < 8; ++x) {
+            piece* p = getPieceAt(x, y);
+            if (p != nullptr) {
+                std::cout << p->getSymbol() << ' '; 
+            } else {
+                std::cout << ". ";
+            }
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+

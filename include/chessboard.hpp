@@ -21,7 +21,9 @@ public:
 
 
     chessMove getLastMove() const { return lastMove; }  
-    void setLastMove(const chessMove& move) { lastMove = move; }  
+    void setLastMove(const chessMove& move) { lastMove = move; }
+
+    void printBoard() const; // FOR DEBUGGING PURPOSES  
 
 private:
     void initializeBoard();  

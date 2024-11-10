@@ -4,7 +4,7 @@
 class rook : public piece {
 public:
     rook(bool isWhite, sf::Vector2i position)
-        : piece(isWhite, position, isWhite ? "assets/pieces/rook.white.png" : "assets/pieces/rook.black.png") {}
+        : piece(isWhite, position, isWhite ? "assets/pieces/rook.white.png" : "assets/pieces/rook.black.png", "rook", 'r') {}
 
     void draw(sf::RenderWindow& window) override {
         piece::draw(window);

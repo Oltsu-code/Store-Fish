@@ -3,7 +3,7 @@
 class pawn : public piece {
 public:
     pawn(bool isWhite, sf::Vector2i position)
-        : piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png") {}
+        : piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png", "pawn", 'p') {}
 
     void draw(sf::RenderWindow& window) override {
         piece::draw(window);
@@ -39,12 +39,11 @@ public:
             }
 
             // EN PASSANT CZ ITS MY FAVORITE!!!!!
-            // Check for en passant move
             if (target == nullptr && lastMove.movedPiece != nullptr) {
-                if (dynamic_cast<const pawn*>(lastMove.movedPiece) != nullptr &&
-                    abs(lastMove.startY - lastMove.endY) == 2) {
-                    if (lastMove.endX == startX && lastMove.endY == startY) {
-                        if (endX == lastMove.endX && endY == lastMove.endY + direction) {
+                const pawn* lastMovedPawn = dynamic_cast<const pawn*>(lastMove.movedPiece);
+                if (lastMovedPawn != nullptr && abs(lastMove.startY - lastMove.endY) == 2) {
+                    if (lastMove.endY == startY && (lastMove.endX == startX + 1 || lastMove.endX == startX - 1)) {
+                        if (endX == lastMove.endX && endY == (isWhite ? lastMove.endY - 1 : lastMove.endY + 1)) {
                             std::cout << "EN PASSANT !!!!!!!!!" << std::endl;
                             return true;
                         }
