@@ -4,15 +4,15 @@
 #include <iostream>
 #include <string>
 
-struct chessMove;  // Forward declaration
+struct ChessMove;
 
 #include "move.hpp"
 
-class chessboard;  // Forward declaration
+class Chessboard;
 
-class piece {
+class Piece {
 public:
-    piece(bool isWhite, sf::Vector2i position, const std::string& imagePath, const std::string& name, char symbol)
+    Piece(bool isWhite, sf::Vector2i position, const std::string& imagePath, const std::string& name, char symbol)
         : isWhite(isWhite), position(position), name(name), symbol(symbol), imageLoaded(false) {
         if (!texture.loadFromFile(imagePath)) {
             std::cerr << "Error loading image: " << imagePath << std::endl;
@@ -23,7 +23,7 @@ public:
         }
     }
 
-    virtual ~piece() {}
+    virtual ~Piece() {}
 
     virtual void draw(sf::RenderWindow& window) {
         if (imageLoaded) {
@@ -31,7 +31,7 @@ public:
         }
     }
 
-    virtual bool isValidMove(int startX, int startY, int endX, int endY, const chessboard& board, const chessMove& lastMove) = 0;
+    virtual bool isValidMove(int startX, int startY, int endX, int endY, const Chessboard& board, const ChessMove& lastMove) = 0;
 
     sf::Vector2i getPosition() const { return position; }
 

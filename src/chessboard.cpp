@@ -10,12 +10,12 @@
 #include "../include/pieces/queen.hpp"
 #include "../include/pieces/king.hpp"
 
-chessboard::chessboard() {
-    board.resize(8, std::vector<piece*>(8, nullptr));
+Chessboard::Chessboard() {
+    board.resize(8, std::vector<Piece*>(8, nullptr));
     initializeBoard();
 }
 
-chessboard::~chessboard() {
+Chessboard::~Chessboard() {
     for (auto& row : board) {
         for (auto& p : row) {
             delete p;  
@@ -23,45 +23,45 @@ chessboard::~chessboard() {
     }
 }
 
-void chessboard::initializeBoard() {
+void Chessboard::initializeBoard() {
     for (int i = 0; i < 8; ++i) {
-        board[1][i] = new pawn(true, {i, 1});  
-        board[6][i] = new pawn(false, {i, 6}); 
+        board[1][i] = new Pawn(true, {i, 1});  
+        board[6][i] = new Pawn(false, {i, 6}); 
     }
 
-    board[0][0] = new rook(true, {0, 0});
-    board[0][7] = new rook(true, {7, 0});
-    board[7][0] = new rook(false, {0, 7});
-    board[7][7] = new rook(false, {7, 7});
+    board[0][0] = new Rook(true, {0, 0});
+    board[0][7] = new Rook(true, {7, 0});
+    board[7][0] = new Rook(false, {0, 7});
+    board[7][7] = new Rook(false, {7, 7});
 
-    board[0][1] = new knight(true, {1, 0});
-    board[0][6] = new knight(true, {6, 0});
-    board[7][1] = new knight(false, {1, 7});
-    board[7][6] = new knight(false, {6, 7});
+    board[0][1] = new Knight(true, {1, 0});
+    board[0][6] = new Knight(true, {6, 0});
+    board[7][1] = new Knight(false, {1, 7});
+    board[7][6] = new Knight(false, {6, 7});
 
-    board[0][2] = new bishop(true, {2, 0});
-    board[0][5] = new bishop(true, {5, 0});
-    board[7][2] = new bishop(false, {2, 7});
-    board[7][5] = new bishop(false, {5, 7});
+    board[0][2] = new Bishop(true, {2, 0});
+    board[0][5] = new Bishop(true, {5, 0});
+    board[7][2] = new Bishop(false, {2, 7});
+    board[7][5] = new Bishop(false, {5, 7});
 
-    board[0][3] = new queen(true, {3, 0});
-    board[7][3] = new queen(false, {3, 7});
+    board[0][3] = new Queen(true, {3, 0});
+    board[7][3] = new Queen(false, {3, 7});
 
-    board[0][4] = new king(true, {4, 0});
-    board[7][4] = new king(false, {4, 7});
+    board[0][4] = new King(true, {4, 0});
+    board[7][4] = new King(false, {4, 7});
 }
 
-piece* chessboard::getPieceAt(int x, int y) const {
+Piece* Chessboard::getPieceAt(int x, int y) const {
     if (x >= 0 && x < 8 && y >= 0 && y < 8) {
         return board[y][x];
     }
     return nullptr;
 }
 
-sf::Vector2i chessboard::findKingPosition(bool isWhiteTurn) {
+sf::Vector2i Chessboard::findKingPosition(bool isWhiteTurn) {
     for (int y = 0; y < 8; ++y) {
         for (int x = 0; x < 8; ++x) {
-            piece* p = getPieceAt(x, y);
+            Piece* p = getPieceAt(x, y);
             if (p != nullptr && p->getName() == "king" && p->isWhite == isWhiteTurn) {
                 return sf::Vector2i(x, y);
             }
@@ -70,13 +70,13 @@ sf::Vector2i chessboard::findKingPosition(bool isWhiteTurn) {
     return sf::Vector2i(-1, -1);
 }
 
-bool chessboard::isKingInCheck(bool isWhiteTurn) {
+bool Chessboard::isKingInCheck(bool isWhiteTurn) {
     sf::Vector2i kingPosition = findKingPosition(isWhiteTurn);
 
     for (int y = 0; y < 8; ++y) {
         for (int x = 0; x < 8; ++x) {
-            piece* p = getPieceAt(x, y);
-            if (p != nullptr && p->isWhite != isWhiteTurn && p->isValidMove(x, y, kingPosition.x, kingPosition.y, *this, chessMove(p, x, y, kingPosition.x, kingPosition.y))) {
+            Piece* p = getPieceAt(x, y);
+            if (p != nullptr && p->isWhite != isWhiteTurn && p->isValidMove(x, y, kingPosition.x, kingPosition.y, *this, ChessMove(p, x, y, kingPosition.x, kingPosition.y))) {
                 return true;
             }
         }
@@ -84,16 +84,16 @@ bool chessboard::isKingInCheck(bool isWhiteTurn) {
     return false;
 }
 
-bool chessboard::isCheckmate(bool isWhiteTurn) {
+bool Chessboard::isCheckmate(bool isWhiteTurn) {
     if (isKingInCheck(isWhiteTurn)) {
         for (int y = 0; y < 8; ++y) {
             for (int x = 0; x < 8; ++x) {
-                piece* p = getPieceAt(x, y);
+                Piece* p = getPieceAt(x, y);
                 if (p != nullptr && p->isWhite == isWhiteTurn) {
                     for (int dy = -1; dy <= 1; ++dy) {
                         for (int dx = -1; dx <= 1; ++dx) {
                             int newX = x + dx, newY = y + dy;
-                            if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && p->isValidMove(x, y, newX, newY, *this, chessMove(p, x, y, newX, newY))) {
+                            if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && p->isValidMove(x, y, newX, newY, *this, ChessMove(p, x, y, newX, newY))) {
                                 return false;
                             }
                         }
@@ -106,16 +106,16 @@ bool chessboard::isCheckmate(bool isWhiteTurn) {
     return false;
 }
 
-bool chessboard::isStalemate(bool isWhiteTurn) {
+bool Chessboard::isStalemate(bool isWhiteTurn) {
     if (!isKingInCheck(isWhiteTurn)) {
         for (int y = 0; y < 8; ++y) {
             for (int x = 0; x < 8; ++x) {
-                piece* p = getPieceAt(x, y);
+                Piece* p = getPieceAt(x, y);
                 if (p != nullptr && p->isWhite == isWhiteTurn) {
                     for (int dy = -1; dy <= 1; ++dy) {
                         for (int dx = -1; dx <= 1; ++dx) {
                             int newX = x + dx, newY = y + dy;
-                            if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && p->isValidMove(x, y, newX, newY, *this, chessMove(p, x, y, newX, newY))) {
+                            if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && p->isValidMove(x, y, newX, newY, *this, ChessMove(p, x, y, newX, newY))) {
                                 return false;
                             }
                         }
@@ -128,8 +128,8 @@ bool chessboard::isStalemate(bool isWhiteTurn) {
     return false;
 }
 
-void chessboard::promote(piece* p, int targetX, int targetY, bool isWhite) {
-    piece* newPiece = nullptr;
+void Chessboard::promote(Piece* p, int targetX, int targetY, bool isWhite) {
+    Piece* newPiece = nullptr;
     std::cout << "Choose a piece to promote to (1-4):" << std::endl;
     std::cout << "1. Queen" << std::endl;
     std::cout << "2. Rook" << std::endl;
@@ -141,20 +141,20 @@ void chessboard::promote(piece* p, int targetX, int targetY, bool isWhite) {
 
     switch (choice) {
         case 1:
-            newPiece = new queen(isWhite, {targetX, targetY});
+            newPiece = new Queen(isWhite, {targetX, targetY});
             break;
         case 2:
-            newPiece = new rook(isWhite, {targetX, targetY});
+            newPiece = new Rook(isWhite, {targetX, targetY});
             break;
         case 3:
-            newPiece = new bishop(isWhite, {targetX, targetY});
+            newPiece = new Bishop(isWhite, {targetX, targetY});
             break;
         case 4:
-            newPiece = new knight(isWhite, {targetX, targetY});
+            newPiece = new Knight(isWhite, {targetX, targetY});
             break;
         default:
             std::cout << "Invalid choice, defaulting to queen" << std::endl;
-            newPiece = new queen(isWhite, {targetX, targetY});
+            newPiece = new Queen(isWhite, {targetX, targetY});
             break;
     }
 
@@ -162,7 +162,7 @@ void chessboard::promote(piece* p, int targetX, int targetY, bool isWhite) {
     delete p;
 }
 
-bool chessboard::movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn) {
+bool Chessboard::movePiece(Piece* p, int targetX, int targetY, bool& isWhiteTurn) {
     if (p == nullptr) return false;
 
     if (p->isWhite != isWhiteTurn) {
@@ -180,7 +180,7 @@ bool chessboard::movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn
     std::cout << p->getSymbol() << " (" << p->getName() << ") "
               << " from " << currentPos.x << currentPos.y << " to " << targetX << targetY << std::endl;
 
-    chessMove lastMove(p, currentPos.x, currentPos.y, targetX, targetY);
+    ChessMove lastMove(p, currentPos.x, currentPos.y, targetX, targetY);
 
     if (p->isValidMove(currentPos.x, currentPos.y, targetX, targetY, *this, lastMove)) {
         this->board[currentPos.y][currentPos.x] = nullptr;
@@ -216,7 +216,7 @@ bool chessboard::movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn
     }
 }
 
-void chessboard::draw(sf::RenderWindow& window) {
+void Chessboard::draw(sf::RenderWindow& window) {
     drawSquares(window);
     for (auto& row : board) {
         for (auto& p : row) {
@@ -227,7 +227,7 @@ void chessboard::draw(sf::RenderWindow& window) {
     }
 }
 
-void chessboard::drawSquares(sf::RenderWindow& window) {
+void Chessboard::drawSquares(sf::RenderWindow& window) {
     for (int y = 0; y < 8; ++y) {
         for (int x = 0; x < 8; ++x) {
             sf::RectangleShape square(sf::Vector2f(64.f, 64.f));
@@ -243,11 +243,11 @@ void chessboard::drawSquares(sf::RenderWindow& window) {
 }
 
 //* FOR DEBUG PURPOSES
-void chessboard::printBoard() const {
+void Chessboard::printBoard() const {
     std::cout << "Board:" << std::endl;
     for (int y = 0; y < 8; ++y) {
         for (int x = 0; x < 8; ++x) {
-            piece* p = getPieceAt(x, y);
+            Piece* p = getPieceAt(x, y);
             if (p != nullptr) {
                 std::cout << p->getSymbol() << ' '; 
             } else {

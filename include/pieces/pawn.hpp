@@ -1,16 +1,16 @@
 #include <iostream>
 
-class pawn : public piece {
+class Pawn : public Piece {
 public:
-    pawn(bool isWhite, sf::Vector2i position)
-        : piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png", "pawn", 'p') {}
+    Pawn(bool isWhite, sf::Vector2i position)
+        : Piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png", "pawn", 'p') {}
 
     void draw(sf::RenderWindow& window) override {
-        piece::draw(window);
+        Piece::draw(window);
     }
 
     bool isValidMove(int startX, int startY, int endX, int endY,
-        const chessboard& board, const chessMove& lastMove) override {
+        const Chessboard& board, const ChessMove& lastMove) override {
             int direction = isWhite ? 1 : -1;
 
             // Ensure move is within bounds
@@ -33,14 +33,14 @@ public:
 
             // Capture
             if ((endX == startX + 1 || endX == startX - 1) && endY == startY + direction) {
-                piece* target = board.getPieceAt(endX, endY);
+                Piece* target = board.getPieceAt(endX, endY);
                 if (target != nullptr && target->isWhite != isWhite) {
                     return true;
                 }
             }
 
             // EN PASSANT
-            if (lastMove.movedPiece != nullptr && dynamic_cast<const pawn*>(lastMove.movedPiece) != nullptr) {
+            if (lastMove.movedPiece != nullptr && dynamic_cast<const Pawn*>(lastMove.movedPiece) != nullptr) {
                 std::cout << "Last move was a pawn." << std::endl;
                 if (abs(lastMove.startY - lastMove.endY) == 2) {
                     std::cout << "Last move was a two-square move." << std::endl;

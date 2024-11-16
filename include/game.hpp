@@ -5,18 +5,18 @@
 #include "chessboard.hpp"
 #include "ui.hpp"
 
-class game {
+class Game {
 public:
-    game();
-    ~game();
+    Game();
+    ~Game();
 
     void handleInput(const sf::Event& event, sf::RenderWindow& window);
     void update();
     void render(sf::RenderWindow& window);
 
 private:
-    chessboard* board;
-    piece* selectedPiece;
+    Chessboard* board;
+    Piece* selectedPiece;
     bool isWhiteTurn;
 
     UI* ui;

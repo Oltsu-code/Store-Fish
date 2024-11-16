@@ -9,7 +9,7 @@ public:
     UI();
     ~UI();
 
-    void update(bool isWhiteTurn, chessboard* board);
+    void update(bool isWhiteTurn, Chessboard* board);
     void draw(sf::RenderWindow& window);
 
     void resetGame();

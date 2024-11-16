@@ -1,17 +1,17 @@
 #pragma once
 #include "../Piece.hpp"
 
-class rook : public piece {
+class Rook : public Piece {
 public:
-    rook(bool isWhite, sf::Vector2i position)
-        : piece(isWhite, position, isWhite ? "assets/pieces/rook.white.png" : "assets/pieces/rook.black.png", "rook", 'r') {}
+    Rook(bool isWhite, sf::Vector2i position)
+        : Piece(isWhite, position, isWhite ? "assets/pieces/rook.white.png" : "assets/pieces/rook.black.png", "rook", 'r') {}
 
     void draw(sf::RenderWindow& window) override {
-        piece::draw(window);
+        Piece::draw(window);
     }
 
     bool isValidMove(int startX, int startY, int endX, int endY, 
-        const chessboard& board, const chessMove& lastMove) override {
+        const Chessboard& board, const ChessMove& lastMove) override {
         // Check if in the board
         if (endX < 0 || endX >= 8 || endY < 0 || endY >= 8) {
             return false;
@@ -35,7 +35,7 @@ public:
             y += dy;
         }
 
-        piece* targetPiece = board.getPieceAt(endX, endY);
+        Piece* targetPiece = board.getPieceAt(endX, endY);
         if (targetPiece != nullptr && targetPiece->isWhite == this->isWhite) {
             return false;
         }
