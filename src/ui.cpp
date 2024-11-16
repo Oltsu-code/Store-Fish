@@ -1,37 +1,60 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 #include "../include/ui.hpp"
+#include "../include/chessboard.hpp"
 
-UI::UI(float leftBarWidth, float rightBarWidth)
-    : leftBarWidth(leftBarWidth), rightBarWidth(rightBarWidth) {
-
-    leftBar.setSize(sf::Vector2f(leftBarWidth, 512.f));
-    leftBar.setFillColor(sf::Color(50, 50, 50));
-
-    rightBar.setSize(sf::Vector2f(rightBarWidth, 512.f));
-    rightBar.setFillColor(sf::Color(70, 70, 70));
-
-    if (!font.loadFromFile("assets/fonts/arial.ttf")) {
-        std::cerr << "Failed to load font!" << std::endl;
+UI::UI() {
+    if (!font.loadFromFile("assets/fonts/Arial.ttf")) {
+        std::cerr << "Error loading font!" << std::endl;
+        return;
     }
+
+    rightBar.setSize(sf::Vector2f(288.f, 512.f));
+    rightBar.setFillColor(sf::Color(36, 36, 36));
+
+    rightBar.setPosition(512.f, 0.f);
 
     gameInfoText.setFont(font);
     gameInfoText.setCharacterSize(24);
     gameInfoText.setFillColor(sf::Color::White);
-    gameInfoText.setPosition(leftBarWidth + 10.f, 10.f);
-    gameInfoText.setString("Game Info: \nMove History: \n...");
+    gameInfoText.setPosition(512.f + 10.f, 10.f);
+    gameInfoText.setStyle(sf::Text::Bold);
+    gameInfoText.setString("Loading...");
 }
 
 UI::~UI() {
-    //TODO
+
 }
 
 void UI::draw(sf::RenderWindow& window) {
-    window.draw(leftBar);
     window.draw(rightBar);
-    window.draw(gameInfoText);
+    if (!gameInfoText.getString().isEmpty()) {
+            window.draw(gameInfoText); 
+            /**
+            *! IF ANYONE IS READING THIS,
+            *! PLEASE HELP ME FIX THIS PART 
+            *! IT`S CRASHING THE WINDOW FOR NO APPARENT REASON
+            *! PLEASE HELP 
+            */
+    } else {
+        std::cerr << "Failed to draw game info text" << std::endl;  
+        window.close();
+    } 
 }
 
-void UI::update() {
-    //TODO Update game info
+void UI::update(bool isWhiteTurn, chessboard* board) {
+    gameInfoText.setString(isWhiteTurn ? "White to move" : "Black to move");
+}
+
+void UI::resetGame() {
+    std::cout << "New game started!" << std::endl;
+}
+
+void UI::flipBoard() {
+    std::cout << "Board flipped!" << std::endl;
+}
+
+void UI::closeGame() {
+    std::cout << "Closing game..." << std::endl;
 }

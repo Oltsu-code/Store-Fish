@@ -19,13 +19,14 @@ public:
     piece* getPieceAt(int x, int y) const;  
     bool movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn);
 
-
     chessMove getLastMove() const { return lastMove; }  
     void setLastMove(const chessMove& move) { lastMove = move; }
 
     bool isKingInCheck(bool isWhiteTurn);
     bool isCheckmate(bool isWhiteTurn);
     bool isStalemate(bool isWhiteTurn);
+
+    void promote(piece* p, int targetX, int targetY, bool isWhite);
 
     void printBoard() const; // FOR DEBUGGING PURPOSES  
 

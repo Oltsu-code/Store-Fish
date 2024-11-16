@@ -128,6 +128,40 @@ bool chessboard::isStalemate(bool isWhiteTurn) {
     return false;
 }
 
+void chessboard::promote(piece* p, int targetX, int targetY, bool isWhite) {
+    piece* newPiece = nullptr;
+    std::cout << "Choose a piece to promote to (1-4):" << std::endl;
+    std::cout << "1. Queen" << std::endl;
+    std::cout << "2. Rook" << std::endl;
+    std::cout << "3. Bishop" << std::endl;
+    std::cout << "4. Knight" << std::endl;
+
+    int choice;
+    std::cin >> choice;
+
+    switch (choice) {
+        case 1:
+            newPiece = new queen(isWhite, {targetX, targetY});
+            break;
+        case 2:
+            newPiece = new rook(isWhite, {targetX, targetY});
+            break;
+        case 3:
+            newPiece = new bishop(isWhite, {targetX, targetY});
+            break;
+        case 4:
+            newPiece = new knight(isWhite, {targetX, targetY});
+            break;
+        default:
+            std::cout << "Invalid choice, defaulting to queen" << std::endl;
+            newPiece = new queen(isWhite, {targetX, targetY});
+            break;
+    }
+
+    board[targetY][targetX] = newPiece;
+    delete p;
+}
+
 bool chessboard::movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn) {
     if (p == nullptr) return false;
 
@@ -143,12 +177,22 @@ bool chessboard::movePiece(piece* p, int targetX, int targetY, bool& isWhiteTurn
     std::cout << p->getSymbol() << " (" << p->getName() << ") "
               << " from " << startPos << " to " << endPos << std::endl;
 
+    std::cout << p->getSymbol() << " (" << p->getName() << ") "
+              << " from " << currentPos.x << currentPos.y << " to " << targetX << targetY << std::endl;
+
     chessMove lastMove(p, currentPos.x, currentPos.y, targetX, targetY);
 
     if (p->isValidMove(currentPos.x, currentPos.y, targetX, targetY, *this, lastMove)) {
         this->board[currentPos.y][currentPos.x] = nullptr;
         p->setPosition(sf::Vector2i(targetX, targetY));
         this->board[targetY][targetX] = p;
+
+        // Promotion
+        if (p->getSymbol() == 'p') {
+            if (targetY == (isWhiteTurn ? 7 : 0)) {
+                promote(p, targetX, targetY, isWhiteTurn);
+            }
+        }
 
         if (isCheckmate(isWhiteTurn)) {
             std::cout << "Checkmate! " << (isWhiteTurn ? "Black" : "White") << " wins!" << std::endl;
