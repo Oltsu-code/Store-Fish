@@ -12,8 +12,9 @@ class Chessboard;
 
 class Piece {
 public:
-    Piece(bool isWhite, sf::Vector2i position, const std::string& imagePath, const std::string& name, char symbol)
-        : isWhite(isWhite), position(position), name(name), symbol(symbol), imageLoaded(false) {
+    Piece(bool isWhite, sf::Vector2i position, const std::string& imagePath,
+        const std::string& name, const char symbol, int value)
+        : isWhite(isWhite), position(position), name(name), symbol(symbol), value(value), imageLoaded(false) {
         if (!texture.loadFromFile(imagePath)) {
             std::cerr << "Error loading image: " << imagePath << std::endl;
         } else {
@@ -42,6 +43,7 @@ public:
 
     std::string getName() const { return name; }
     char getSymbol() const { return symbol; }
+    int getValue() const { return value; }
 
     bool isWhite;
 
@@ -51,6 +53,7 @@ protected:
     bool imageLoaded;
     std::string name;
     char symbol;
+    int value;
 
 private:
     sf::Vector2i position;

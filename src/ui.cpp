@@ -43,7 +43,7 @@ void UI::draw(sf::RenderWindow& window) {
     } 
 }
 
-void UI::update(bool isWhiteTurn, chessboard* board) {
+void UI::update(bool isWhiteTurn, Chessboard* board) {
     gameInfoText.setString(isWhiteTurn ? "White to move" : "Black to move");
 }
 

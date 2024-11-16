@@ -3,17 +3,17 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-game::game() : isWhiteTurn(true), selectedPiece(nullptr) {
-    board = new chessboard();
+Game::Game() : isWhiteTurn(true), selectedPiece(nullptr) {
+    board = new Chessboard();
     ui = new UI();
 }
 
-game::~game() {
+Game::~Game() {
     delete board;  
     //delete ui; 
 }
 
-void game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
+void Game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
     // UI
     if (event.type == sf::Event::MouseButtonPressed) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(window);
@@ -42,7 +42,7 @@ void game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
         int x = event.mouseButton.x / 64;
         int y = event.mouseButton.y / 64;
 
-        piece* clickedPiece = board->getPieceAt(x, y);
+        Piece* clickedPiece = board->getPieceAt(x, y);
 
         if (selectedPiece == nullptr) {
             if (clickedPiece != nullptr && clickedPiece->isWhite == isWhiteTurn) {
@@ -56,11 +56,11 @@ void game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
         }
     }
 }
-void game::update() {
+void Game::update() {
     ui->update(this->isWhiteTurn, this->board);
 }
 
-void game::render(sf::RenderWindow& window) {
+void Game::render(sf::RenderWindow& window) {
     board->draw(window);
     ui->draw(window);
     ui->update(this->isWhiteTurn, this->board);

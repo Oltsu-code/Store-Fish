@@ -9,7 +9,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 512),
     "Store Fish - Chess engine | Oltsu-Code", sf::Style::Titlebar | sf::Style::Close);
 
-    game chessGame;
+    Game chessGame;
 
     std::cout << "Done!" << std::endl;
 

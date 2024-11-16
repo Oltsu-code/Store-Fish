@@ -4,7 +4,8 @@
 class Knight : public Piece {
 public:
     Knight(bool isWhite, sf::Vector2i position)
-        : Piece(isWhite, position, isWhite ? "assets/pieces/knight.white.png" : "assets/pieces/knight.black.png", "knight", 'n') {}
+        : Piece(isWhite, position, isWhite ? "assets/pieces/knight.white.png" : "assets/pieces/knight.black.png",
+        "knight", 'n', 1) {}
 
     void draw(sf::RenderWindow& window) override {
         Piece::draw(window);

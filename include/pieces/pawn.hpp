@@ -3,7 +3,8 @@
 class Pawn : public Piece {
 public:
     Pawn(bool isWhite, sf::Vector2i position)
-        : Piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png", "pawn", 'p') {}
+        : Piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png",
+        "pawn", 'p', 1) {}
 
     void draw(sf::RenderWindow& window) override {
         Piece::draw(window);
