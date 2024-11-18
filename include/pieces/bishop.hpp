@@ -4,7 +4,7 @@
 class Bishop : public Piece {
 public:
     Bishop(bool isWhite, sf::Vector2i position)
-        : Piece(isWhite, position, isWhite ? "assets/pieces/bishop.white.png" : "assets/pieces/bishop.black.png",
+        : Piece(isWhite, position, isWhite ? "assets/images/pieces/bishop.white.png" : "assets/images/pieces/bishop.black.png",
          "bishop", 'b', 3) {}
 
     void draw(sf::RenderWindow& window) override {

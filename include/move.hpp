@@ -14,11 +14,4 @@ struct ChessMove {
         : movedPiece(movedPiece), startX(startX), startY(startY), endX(endX), endY(endY) {
     }
 
-    //static chessMove lastMove;
-
-    /*static void updateLastMove(const chessMove& move) {
-        lastMove = move;
-    }*/
 };
-
-//chessMove chessMove::lastMove{nullptr, 0, 0, 0, 0};

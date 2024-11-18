@@ -14,45 +14,39 @@ Game::~Game() {
 }
 
 void Game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
-    // UI
-    if (event.type == sf::Event::MouseButtonPressed) {
+    
+    if (event.type == sf::Event::MouseButtonPressed) 
+    {   
         sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
-        if (ui->getNewGameButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            ui->resetGame();
-            std::cout << "New Game!" << std::endl;
-            return;
-        }
-
-        if (ui->getFlipBoardButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            ui->flipBoard();
-            std::cout << "Board Flipped!" << std::endl;
-            return;
-        }
-
-        if (ui->getCloseButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            ui->closeGame();
-            std::cout << "Game Closed!" << std::endl;
-            return;
-        }
-    }
-
-    // Board 
-    if (event.type == sf::Event::MouseButtonPressed) {
-        int x = event.mouseButton.x / 64;
-        int y = event.mouseButton.y / 64;
-
-        Piece* clickedPiece = board->getPieceAt(x, y);
-
-        if (selectedPiece == nullptr) {
-            if (clickedPiece != nullptr && clickedPiece->isWhite == isWhiteTurn) {
-                selectedPiece = clickedPiece;
-            } else {
-                std::cout << "Invalid selection!" << std::endl;
+        // UI
+        if (mousePos.x > 512)
+        {
+            if (ui->getNewGameButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                ui->resetGame();
+                return;
             }
-        } else {
-            board->movePiece(selectedPiece, x, y, isWhiteTurn);
-            selectedPiece = nullptr;
+
+            if (ui->getFlipBoardButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                ui->flipBoard();
+                return;
+            }
+        } else { // Board
+            int x = mousePos.x / 64;
+            int y = mousePos.y / 64;
+
+            Piece* clickedPiece = board->getPieceAt(x, y);
+
+            if (selectedPiece == nullptr) {
+                if (clickedPiece != nullptr && clickedPiece->isWhite == isWhiteTurn) {
+                    selectedPiece = clickedPiece;
+                } else {
+                    std::cout << "Invalid selection!" << std::endl;
+                }
+            } else {
+                board->movePiece(selectedPiece, x, y, isWhiteTurn);
+                selectedPiece = nullptr;
+            }
         }
     }
 }

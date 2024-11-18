@@ -4,7 +4,7 @@
 class King : public Piece {
 public:
     King(bool isWhite, sf::Vector2i position)
-        : Piece(isWhite, position, isWhite ? "assets/pieces/king.white.png" : "assets/pieces/king.black.png",
+        : Piece(isWhite, position, isWhite ? "assets/images/pieces/king.white.png" : "assets/images/pieces/king.black.png",
         "king", 'k', 0) {}
 
     void draw(sf::RenderWindow& window) override {

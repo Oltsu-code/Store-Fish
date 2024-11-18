@@ -3,7 +3,7 @@
 class Pawn : public Piece {
 public:
     Pawn(bool isWhite, sf::Vector2i position)
-        : Piece(isWhite, position, isWhite ? "assets/pieces/pawn.white.png" : "assets/pieces/pawn.black.png",
+        : Piece(isWhite, position, isWhite ? "assets/images/pieces/pawn.white.png" : "assets/images/pieces/pawn.black.png",
         "pawn", 'p', 1) {}
 
     void draw(sf::RenderWindow& window) override {
@@ -41,7 +41,7 @@ public:
             }
 
             // EN PASSANT
-            if (lastMove.movedPiece != nullptr && dynamic_cast<const Pawn*>(lastMove.movedPiece) != nullptr) {
+            /*if (lastMove.movedPiece != nullptr && dynamic_cast<const Pawn*>(lastMove.movedPiece) != nullptr) {
                 std::cout << "Last move was a pawn." << std::endl;
                 if (abs(lastMove.startY - lastMove.endY) == 2) {
                     std::cout << "Last move was a two-square move." << std::endl;
@@ -57,7 +57,7 @@ public:
                         }
                     }
                 }
-            }
+            }*/
 
         return false;
     }

@@ -2,6 +2,9 @@
 #include "../include/move.hpp"
 #include "../include/chessboard.hpp"
 #include "../include/util.hpp"
+#include "../include/search.hpp"
+#include "../include/movegen.hpp"
+#include "../include/eval.hpp"
 
 #include "../include/pieces/pawn.hpp"
 #include "../include/pieces/rook.hpp"

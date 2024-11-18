@@ -18,7 +18,6 @@ public:
 
     sf::Sprite getNewGameButton() const { return newGameButtonSprite; }
     sf::Sprite getFlipBoardButton() const { return flipBoardButtonSprite; }
-    sf::Sprite getCloseButton() const { return closeButtonSprite; }
 
 private:
     sf::Font font;
@@ -32,7 +31,6 @@ private:
 
     sf::Texture newGameButtonTexture;
     sf::Texture flipBoardButtonTexture;
-    sf::Texture closeButtonTexture;
 
     const float buttonSpacing = 10.0f;
     const float buttonWidth = 150.0f;  

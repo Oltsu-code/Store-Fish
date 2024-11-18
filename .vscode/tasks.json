@@ -27,8 +27,8 @@
             "command": "xcopy",
             "args": [
                 "/E", "/I", "/H", "/Y",
-                "assets\\pieces\\*",
-                "build\\assets\\pieces\\"
+                "assets\\*",
+                "build\\assets\\"
             ],
             "problemMatcher": [],
             "group": {
@@ -41,31 +41,11 @@
             "detail": "Copies assets from pieces directory"
         },
         {
-            "label": "Copy Fonts",
-            "type": "shell",
-            "command": "xcopy",
-            "args": [
-                "/E", "/I", "/H", "/Y",
-                "assets\\fonts\\*",
-                "build\\assets\\fonts\\"
-            ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "detail": "Copies assets from fonts directory"
-        },
-        {
             "label": "Build and Copy",
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Build Chess Engine",
-                "Copy Assets",
-                "Copy Fonts"
+                "Copy Assets"
             ],
             "group": {
                 "kind": "build",

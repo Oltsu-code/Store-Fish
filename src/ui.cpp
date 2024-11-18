@@ -12,8 +12,23 @@ UI::UI() {
 
     rightBar.setSize(sf::Vector2f(288.f, 512.f));
     rightBar.setFillColor(sf::Color(36, 36, 36));
-
     rightBar.setPosition(512.f, 0.f);
+
+    if (!newGameButtonTexture.loadFromFile("assets/images/new_game_icon.png")) {
+        std::cerr << "Error loading new game button!" << std::endl;
+        return;
+    } 
+    newGameButtonSprite.setTexture(newGameButtonTexture);
+    newGameButtonSprite.setPosition(725.f, 10.f);
+    newGameButtonSprite.setScale(0.1f, 0.1f);
+
+    if (!flipBoardButtonTexture.loadFromFile("assets/images/flip_board_icon.png")) {
+        std::cerr << "Error loading flip board button!" << std::endl;
+        return;
+    }
+    flipBoardButtonSprite.setTexture(flipBoardButtonTexture);
+    flipBoardButtonSprite.setPosition(760.f, 10.f);
+    flipBoardButtonSprite.setScale(0.1f, 0.1f);
 
     gameInfoText.setFont(font);
     gameInfoText.setCharacterSize(24);
@@ -31,16 +46,13 @@ void UI::draw(sf::RenderWindow& window) {
     window.draw(rightBar);
     if (!gameInfoText.getString().isEmpty()) {
             window.draw(gameInfoText); 
-            /**
-            *! IF ANYONE IS READING THIS,
-            *! PLEASE HELP ME FIX THIS PART 
-            *! IT`S CRASHING THE WINDOW FOR NO APPARENT REASON
-            *! PLEASE HELP 
-            */
     } else {
         std::cerr << "Failed to draw game info text" << std::endl;  
         window.close();
-    } 
+    }
+    window.draw(newGameButtonSprite);
+    window.draw(flipBoardButtonSprite);
+    window.draw(closeButtonSprite);
 }
 
 void UI::update(bool isWhiteTurn, Chessboard* board) {
@@ -53,8 +65,4 @@ void UI::resetGame() {
 
 void UI::flipBoard() {
     std::cout << "Board flipped!" << std::endl;
-}
-
-void UI::closeGame() {
-    std::cout << "Closing game..." << std::endl;
 }

@@ -28,6 +28,8 @@ public:
 
     void promote(Piece* p, int targetX, int targetY, bool isWhite);
 
+    void makeMove(const ChessMove& move);
+
     void printBoard() const; // FOR DEBUGGING PURPOSES  
 
 private:
