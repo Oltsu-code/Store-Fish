@@ -11,7 +11,7 @@ class Chessboard {
 public:
     Chessboard();  
     ~Chessboard();  
-    
+     
     void draw(sf::RenderWindow& window);  
     void drawSquares(sf::RenderWindow& window);  
     
@@ -22,15 +22,11 @@ public:
     ChessMove getLastMove() const { return lastMove; }  
     void setLastMove(const ChessMove& move) { lastMove = move; }
 
-    bool isKingInCheck(bool isWhiteTurn);
-    bool isCheckmate(bool isWhiteTurn);
-    bool isStalemate(bool isWhiteTurn);
-
     void promote(Piece* p, int targetX, int targetY, bool isWhite);
 
     void makeMove(const ChessMove& move);
 
-    void printBoard() const; // FOR DEBUGGING PURPOSES  
+    void printBoard() const; // FOR DEBUGGING
 
 private:
     void initializeBoard();  
@@ -40,4 +36,4 @@ private:
     sf::Vector2i findKingPosition(bool isWhiteTurn);
 };
 
-#endif 
+#endif

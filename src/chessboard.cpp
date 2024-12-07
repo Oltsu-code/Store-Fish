@@ -61,6 +61,7 @@ Piece* Chessboard::getPieceAt(int x, int y) const {
     return nullptr;
 }
 
+//* TEMPORARY 
 void Chessboard::promote(Piece* p, int targetX, int targetY, bool isWhite) {
     Piece* newPiece = nullptr;
     std::cout << "Choose a piece to promote to (1-4):" << std::endl;
@@ -104,11 +105,11 @@ bool Chessboard::movePiece(Piece* p, int targetX, int targetY, bool& isWhiteTurn
     }
 
     sf::Vector2i currentPos = p->getPosition();
-    std::string startPos = indexToNotation(currentPos.x, currentPos.y);
-    std::string endPos = indexToNotation(targetX, targetY);
+    std::string startPosNotation = indexToNotation(currentPos.x, currentPos.y);
+    std::string endPosNotation = indexToNotation(targetX, targetY);
 
     std::cout << p->getSymbol() << " (" << p->getName() << ") "
-              << " from " << startPos << " to " << endPos << std::endl;
+              << " from " << startPosNotation << " to " << endPosNotation << std::endl;
 
     std::cout << p->getSymbol() << " (" << p->getName() << ") "
               << " from " << currentPos.x << currentPos.y << " to " << targetX << targetY << std::endl;
@@ -120,7 +121,7 @@ bool Chessboard::movePiece(Piece* p, int targetX, int targetY, bool& isWhiteTurn
         p->setPosition(sf::Vector2i(targetX, targetY));
         this->board[targetY][targetX] = p;
 
-        // Promotion
+        // promotion
         if (p->getSymbol() == 'p') {
             if (targetY == (isWhiteTurn ? 7 : 0)) {
                 promote(p, targetX, targetY, isWhiteTurn);
@@ -131,7 +132,7 @@ bool Chessboard::movePiece(Piece* p, int targetX, int targetY, bool& isWhiteTurn
 
         std::cout << "Move successful. Turn switched to " << (isWhiteTurn ? "White" : "Black") << std::endl;
 
-        printBoard(); //* FOR DEBUG PURPOSES (remove when done)
+        printBoard(); //* FOR DEBUGGING
 
         return true;
     } else {
@@ -166,7 +167,7 @@ void Chessboard::drawSquares(sf::RenderWindow& window) {
     }
 }
 
-//* FOR DEBUG PURPOSES
+//* FOR DEBUGGING
 void Chessboard::printBoard() const {
     std::cout << "Board:" << std::endl;
     for (int y = 0; y < 8; ++y) {

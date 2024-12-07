@@ -13,17 +13,17 @@ public:
 
     bool isValidMove(int startX, int startY, int endX, int endY,
         const Chessboard& board, const ChessMove& lastMove) override {
-        // Check if inside the board
+        // check if inside the board
         if (endX < 0 || endX >= 8 || endY < 0 || endY >= 8) {
             return false;
         }
 
-        // L
+        // L 🗿
         if (!(abs(startX - endX) == 2 && abs(startY - endY) == 1) && !(abs(startX - endX) == 1 && abs(startY - endY) == 2)) {
-            return false;  // Invalid move for a knight
+            return false;
         }
 
-        // Friendly fire
+        // friendly fire
         Piece* targetPiece = board.getPieceAt(endX, endY);
         if (targetPiece != nullptr && targetPiece->isWhite == this->isWhite) {
             return false;

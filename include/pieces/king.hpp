@@ -13,23 +13,23 @@ public:
 
     bool isValidMove(int startX, int startY, int endX, int endY,
         const Chessboard& board, const ChessMove& lastMove) override {
-        // Check if inside the board
+        // check if in board
         if (endX < 0 || endX >= 8 || endY < 0 || endY >= 8) {
             return false;
         }
 
-        // One square in each direction
+        // normal movement
         if (abs(endX - startX) > 1 || abs(endY - startY) > 1) {
             return false;
         }
 
-        // Friendly fire
+        // friendly fire
         Piece* targetPiece = board.getPieceAt(endX, endY);
         if (targetPiece != nullptr && targetPiece->isWhite == this->isWhite) {
             return false;
         }
 
-        //TODO: Castling logic (im too dumb to handle it right now)
+        //TODO: castling logic (im too dumb to handle it right now)
 
         return true;
     }

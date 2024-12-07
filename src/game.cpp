@@ -10,7 +10,7 @@ Game::Game() : isWhiteTurn(true), selectedPiece(nullptr) {
 
 Game::~Game() {
     delete board;  
-    //delete ui; 
+    //! delete ui; 
 }
 
 void Game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
@@ -31,7 +31,7 @@ void Game::handleInput(const sf::Event& event, sf::RenderWindow& window) {
                 ui->flipBoard();
                 return;
             }
-        } else { // Board
+        } else { // board
             int x = mousePos.x / 64;
             int y = mousePos.y / 64;
 

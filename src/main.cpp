@@ -1,3 +1,13 @@
+/* 
+/ I'm loosing hope... This project has been a long time in the making. 
+/ I'm not sure what I'm doing anymore.
+/ Nothings working properly.
+/ I truly am thinking of giving up.
+/ The only thing that's working is the chessboard.
+/ I'm also loosing my mind over this project.
+/ Send help please!
+*/
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 

@@ -13,12 +13,12 @@ public:
 
     bool isValidMove(int startX, int startY, int endX, int endY, 
         const Chessboard& board, const ChessMove& lastMove) override {
-        // Check if inside the board
+        // check if in board
         if (endX < 0 || endX >= 8 || endY < 0 || endY >= 8) {
             return false;
         }
 
-        // Directions
+        // directions
         int dx = endX - startX;
         int dy = endY - startY;
 
